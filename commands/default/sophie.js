@@ -18,7 +18,9 @@ module.exports.run = async (bot, message, args) => {
   }
   if (args == "report") {
     console.log("[!] Someone may have reported someone to Sophie!");
-    message.reply("https://forms.gle/GwD7NcFYVjgekoW88");
+    message.author.send("https://forms.gle/GwD7NcFYVjgekoW88").catch(
+    message.reply("https://forms.gle/GwD7NcFYVjgekoW88")
+    );
   }
 }
 

@@ -1,6 +1,7 @@
 const fs = require("fs");
 const Discord = require('discord.js');
 const main = require("./exports");
+const app = require('express')();
 const config = require("./configs/global.json");
 require("dotenv").config();
 const crypto = require("crypto");
@@ -169,3 +170,27 @@ exports.load = function(folder){
     console.log('tried to load ' + folder + ' but could not find it.')
     }
 };
+
+exports.botStart = function() {
+
+    if(fs.existsSync('./api') == false) {
+        fs.mkdirSync('./api');
+    }
+    
+  // ! BETA. 
+  // unquote if on heroku
+  // setInterval(function() {got(global.heroku)}, 300 * 1000)
+  // every 300 seconds. (5 minutes)
+
+}
+
+exports.api = function() { // ! API is in alpha. do NOT use.
+  // ? FOR HEROKU.
+  try {
+    app.listen(process.env.PORT || 1900)
+  } catch (err) {
+    console.log("could start on specified port. error: " + err)
+  }
+  // ? SETUP AN ACCOUNT AT cron-job.org FOR KEEPING THE BOT ALIVE. or use the keep alive.
+
+}

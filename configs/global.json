@@ -4,7 +4,7 @@
 
     "prefix": "./",
 
-    "defaultmodulename": "default",
+    "defaultmodules": ["default", "admin", "util"],
     
     "presence": "WATCHING",
     "name": "the chats!",

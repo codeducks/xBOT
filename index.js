@@ -1,5 +1,5 @@
 const Discord = require("discord.js")
-require('dotenv').config()
+require('dotenv').config();
 const global = require("./configs/global.json")
 const fs = require("fs")
 const bot = new Discord.Client();
@@ -12,44 +12,27 @@ bot.aliases = new Discord.Collection();
 
 if(process.env.TOKEN === "setmeplease") return console.log("[!] Set your token up! Go to https://www.discordapp.com/developers and generate a token from a bot user.");
 
-console.clear()
-console.log("xBOT CONSOLE")
-console.log("------------")
-
-fs.readdir(`./commands/${global.defaultmodulename}`, (err, files) => {
-  if(err) console.log(err);
-
-  let jsfile = files.filter(f => f.split(".").pop() === "js");
-
-  if(jsfile.length <= 0){
-    console.log("[!] Couldn't find commands.");
-    return;
-  }
-
-  jsfile.forEach((f, i) =>{
-      let props = require(`./commands/${global.defaultmodulename}/${f}`);
-      console.log(`[*] ${f} loaded!`);
-      bot.commands.set(props.help.name, props);
-      props.help.aliases.forEach(alias => {
-      bot.aliases.set(alias, props.help.name);
-    });
-  });
-
-  console.log("------------");
-
-});
+console.clear();
+console.log("Loading...")
 
 bot.on("ready", () => {
-  console.log("[!] " + bot.user.username + " is online.")
-  console.log("------------");
+
+  console.clear()
+  console.log( bot.user.username + " CONSOLE")
+  console.log("------------")
+  
+  exp.botStart();
+
+  global.defaultmodules.forEach((f, i) =>{
+    exp.load(f);
+  });
 
   bot.user.setActivity(global.name, {
     type: global.presence // ! WATCHING, STREAMING, LISTENING OR PLAYING set it in global.json
   });
 
-  // ? FOR HEROKU.
-  http.createServer().listen(process.env.PORT || 00)
-  // ? SETUP AN ACCOUNT AT cron-job.org FOR KEEPING THE BOT ALIVE.
+  console.log("[!] " + bot.user.username + " is online.")
+  console.log("------------");
 
   // unquote if on heroku
   // setInterval(function() {got(global.heroku)}, 900 * 1000)
@@ -60,7 +43,7 @@ bot.on("message", async message => {
   //a little bit of data parsing/general checks
   if (message.content.indexOf(global.prefix) !== 0) return;
   if(message.author.bot) return;
-  if(message.channel.type === 'dm') return;
+  if(message.channel.type === 'dm') return; // ? comment out if you want to enable commands in DMs.
   let content = message.content.split(" ");
   let command = content[0];
   let args = content.slice(1);
@@ -72,7 +55,7 @@ bot.on("message", async message => {
 })
 
 exports.loadCommand = function(a, b){bot.commands.set(a, b)} // for adding commands to the bot
-exports.loadAlias = function(c, d){bot.aliases.set(c, d)} // for addding aliases to the bot
+exports.loadAlias = function(c, d){bot.aliases.set(c, d)} // for adding aliases to the bot
 exports.reload = function(arg, module) {
   console.clear();
   bot.commands = new Discord.Collection();
