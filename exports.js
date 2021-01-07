@@ -176,6 +176,8 @@ exports.botStart = function() {
     if(fs.existsSync('./api') == false) {
         fs.mkdirSync('./api');
     }
+
+    app.listen(process.env.PORT)
     
   // ! BETA. 
   // unquote if on heroku
