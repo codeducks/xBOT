@@ -6,8 +6,8 @@
 
     "defaultmodules": ["default", "admin", "util"],
     
-    "presence": "WATCHING",
-    "name": "the chats!",
+    "presence": "PLAYING",
+    "name": "with Discord.",
 
     "heroku": "https://xbota.herokuapp.com/",
     "github": "https://github.com/codeducks/xBOT",

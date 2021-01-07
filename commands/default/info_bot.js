@@ -51,7 +51,7 @@ module.exports.run = async (bot, message, args) => {
             message.channel.send("Loading...");
   
             files.forEach(file => {
-              if(file == global.defaultmodulename) {
+              if(file == global.defaultmodules) {
                 return
               } else {
               exp.load(file);

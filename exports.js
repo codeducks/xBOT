@@ -1,11 +1,27 @@
 const fs = require("fs");
 const Discord = require('discord.js');
 const main = require("./exports");
+const express = require('express');
 const app = require('express')();
 const config = require("./configs/global.json");
 require("dotenv").config();
 const crypto = require("crypto");
 const got = require('got');
+
+exports.botStart = function() { // will be run on bot "ready".
+
+    if(fs.existsSync('./api') == false) {
+        fs.mkdirSync('./api');
+    }
+
+    main.apiStart(); // ? put "a" between the brackets for loading all modules' help pages and "x" to not load the api at all.
+    
+  // ! BETA. 
+  // unquote if on heroku
+  // setInterval(function() {got(global.heroku)}, 300 * 1000)
+  // every 300 seconds. (5 minutes)
+
+}
 
 exports.timestamp = function() {
 	const dateOb = new Date();
@@ -23,7 +39,7 @@ exports.date = function() {
 	return date + "-" + month + "-" + year;
 };
 
-exports.log = function(content) {
+exports.log = function(content) { // logs every thing to a log file
     // logging function
     try {
 	fs.appendFileSync(`./logs/${main.date()}.txt`, `\n [${main.timestamp()}] ${content}`, error => {
@@ -153,7 +169,7 @@ exports.load = function(folder){
         let jsfile = files.filter(f => f.split(".").pop() === "js");
       
         if(jsfile.length <= 0){
-          console.log("[!] Couldn't find commands.");
+          console.log("[ERR] Couldn't find commands.");
           return;
         }
       
@@ -163,7 +179,7 @@ exports.load = function(folder){
             props.help.aliases.forEach(alias => {
             index.loadAlias(alias, props.help.name);
             });
-            console.log(`[*] ${f} loaded!`);
+            console.log(`[CMD] ${f} loaded!`);
         });
         })
     } else {
@@ -171,27 +187,43 @@ exports.load = function(folder){
     }
 };
 
-exports.botStart = function() {
+exports.apiStart = function(use) { // ! API is in alpha. do NOT use.
+  // ? FOR HEROKU.
+    switch (use) {
+        case 'x':
+            console.log("[API] not active.");
+            console.log("------------");
+        return;
+        case 'a':
+            const testFolder = './api';
+  
+          fs.readdir(testFolder, (err, files) => {
+            files.forEach(file => {
+              if(file.endsWith('.html') == true || file.endsWith('.css') == true) {
+                return
+              } else {
+                console.log("[API] Loaded: " + file)
+                app.use(express.static(`./api/${file}`))
+              }
+            });
+            console.log("------------")
+          });
+          return;
 
-    if(fs.existsSync('./api') == false) {
-        fs.mkdirSync('./api');
+        default:
+        config.defaultmodules.forEach((f, i) => {
+        app.use(express.static(`./api/${f}`))
+        console.log('[API] Loaded: ' + f)
+        })
+        console.log("------------")
+        app.use(express.static('api'));
+        break;
     }
 
-    app.listen(process.env.PORT)
-    
-  // ! BETA. 
-  // unquote if on heroku
-  // setInterval(function() {got(global.heroku)}, 300 * 1000)
-  // every 300 seconds. (5 minutes)
-
-}
-
-exports.api = function() { // ! API is in alpha. do NOT use.
-  // ? FOR HEROKU.
   try {
-    app.listen(process.env.PORT || 1900)
+    app.listen(process.env.PORT || 9090)
   } catch (err) {
-    console.log("could start on specified port. error: " + err)
+    console.log("[API] could start on specified port. error: " + err)
   }
   // ? SETUP AN ACCOUNT AT cron-job.org FOR KEEPING THE BOT ALIVE. or use the keep alive.
 
