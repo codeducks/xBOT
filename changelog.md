@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## [v1.5.1](https://github.com/codeducks/xbot/releases/tag/v1.5.1) (8/1/2021)
+
++ better api.
+
 ## [v1.5.0](https://github.com/codeducks/xbot/releases/tag/v1.5) (7/1/2021)
 
 + the index.js now has a very easy way to set default modules. (global.json)
