@@ -35,6 +35,10 @@
         "desc": "kicks the specified user.",
         "use": "kick [user]"
     },
+    "logs": {
+        "desc": "sends logs via dm (only if you're the owner)",
+        "use": "logs"
+    },
     "meme": {
         "desc": "Gets a meme from r/memes",
         "use": "meme"
