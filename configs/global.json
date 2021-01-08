@@ -5,11 +5,13 @@
     "prefix": "./",
 
     "defaultmodules": ["default", "admin", "util"],
-    
+
+    "useapi": true,
+
     "presence": "PLAYING",
     "name": "with Discord.",
 
-    "heroku": "https://xbota.herokuapp.com/",
+    "web_url": "https://xbota.herokuapp.com/",
     "github": "https://github.com/codeducks/xBOT",
     "cmds": "https://codeducks.github.io/xBOT",
     "changelog": "https://codeducks.github.io/xBOT/changelog"

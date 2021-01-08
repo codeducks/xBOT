@@ -4,6 +4,7 @@ const main = require("./exports");
 const express = require('express');
 const app = require('express')();
 const config = require("./configs/global.json");
+const cmds = require('./configs/commands.json');
 require("dotenv").config();
 const crypto = require("crypto");
 const got = require('got');
@@ -14,8 +15,11 @@ exports.botStart = function() { // will be run on bot "ready".
         fs.mkdirSync('./api');
     }
 
-    main.apiStart(); // ? put "a" between the brackets for loading all modules' help pages and "x" to not load the api at all.
-    
+    if (config.useapi == true){
+        main.apiStart();
+        return;
+    }
+
   // ! BETA. 
   // unquote if on heroku
   // setInterval(function() {got(global.heroku)}, 300 * 1000)
@@ -187,38 +191,21 @@ exports.load = function(folder){
     }
 };
 
-exports.apiStart = function(use) { // ! API is in alpha. do NOT use.
+exports.apiStart = function() { // ? to add commands and stuff look at the ./configs/commands.json
   // ? FOR HEROKU.
-    switch (use) {
-        case 'x':
-            console.log("[API] not active.");
-            console.log("------------");
-        return;
-        case 'a':
-            const testFolder = './api';
-  
-          fs.readdir(testFolder, (err, files) => {
-            files.forEach(file => {
-              if(file.endsWith('.html') == true || file.endsWith('.css') == true) {
-                return
-              } else {
-                console.log("[API] Loaded: " + file)
-                app.use(express.static(`./api/${file}`))
-              }
-            });
-            console.log("------------")
-          });
-          return;
-
-        default:
-        config.defaultmodules.forEach((f, i) => {
-        app.use(express.static(`./api/${f}`))
-        console.log('[API] Loaded: ' + f)
-        })
-        console.log("------------")
-        app.use(express.static('api'));
-        break;
-    }
+    app.get("/", function(req, res){
+        res.send("<a href='" + config.cmds + "'>commands<a>");
+    })
+    app.get("/:command", function(req, res){
+        var command = req.params.command;
+        if (!cmds.hasOwnProperty(command)){
+            res.send("404.");
+            return;
+        }
+        var description = cmds[command].desc
+        var layout = config.prefix + cmds[command].use
+        res.render("index.ejs", {cmd: command, desc: description, use: layout});
+    });
 
   try {
     app.listen(process.env.PORT || 9090)
