@@ -3,6 +3,7 @@
 ## [v1.5.2](https://github.com/codeducks/xbot/releases/tag/v1.5.2) (unreleased)
 
 + static pages. (homepage)
++ better file names.
 
 ## [v1.5.1](https://github.com/codeducks/xbot/releases/tag/v1.5.1) (8/1/2021)
 
