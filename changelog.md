@@ -55,9 +55,9 @@ the logs for ./say is because then you can trace back any insulting say's, and h
 + added info_uptime.js command.
 + added admin_prefix.js command.
 
-## [v1.0] (31/12/2020)
+## [v1.1] (31/12/2020)
 
-Was added to v1.2s
+Was added to v1.2
 
 ## [v1.0.1](https://github.com/codeducks/xBOT/releases/tag/v1.0.1) (30/12/2020)    
 
