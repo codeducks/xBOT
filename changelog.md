@@ -8,7 +8,6 @@
 
 + the index.js now has a very easy way to set default modules. (global.json)
 + the bot will have an API for people to get commands from active modules. (done in v1.5.1)
-+ 
 
 > suggestions are always welcome.
 
