@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## [v1.5.2](https://github.com/codeducks/xbot/releases/tag/v1.5.2) (unreleased)
+
++ static pages. (homepage)
+
 ## [v1.5.1](https://github.com/codeducks/xbot/releases/tag/v1.5.1) (8/1/2021)
 
 + better api.
