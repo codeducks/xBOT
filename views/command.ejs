@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+        <title><%= cmd %> </title>
+
+        <style>
+            body {
+                font-family: 'Roboto', sans-serif;
+            }
+            .bold {
+                font-weight: bold;
+            }
+        </style>
+    </head>
+    <body class="container">
+        <h1>The <%= cmd %> command</h1>
+
+        <p class="bold">Description:</p>
+        <p><%= desc %></p>
+        <p class="bold">How to use:</p>
+        <p><%= use %></p>
+    </body>
+</html>

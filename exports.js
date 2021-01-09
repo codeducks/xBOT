@@ -191,12 +191,11 @@ exports.load = function(folder){
     }
 };
 
-exports.apiStart = function() { // ? to add commands and stuff look at the ./configs/commands.json
-  // ? FOR HEROKU.
-    app.get("/", function(req, res){
-        res.send("<a href='" + config.cmds + "'>commands<a>");
-    })
-    app.get("/:command", function(req, res){
+exports.apiStart = function() { // ? to add commands to the api and stuff look at the ./configs/commands.json
+    
+    app.use(express.static("./views/static", { extensions: "html"})); // static pages.
+
+    app.get("/:command", function(req, res){ // command pages.
         var command = req.params.command;
         if (!cmds.hasOwnProperty(command)){
             res.send("404.");
@@ -204,7 +203,7 @@ exports.apiStart = function() { // ? to add commands and stuff look at the ./con
         }
         var description = cmds[command].desc
         var layout = config.prefix + cmds[command].use
-        res.render("index.ejs", {cmd: command, desc: description, use: layout});
+        res.render("command.ejs", {cmd: command, desc: description, use: layout});
     });
 
   try {
