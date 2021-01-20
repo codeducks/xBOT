@@ -162,7 +162,7 @@ exports.check = function(folder){
     }
 };
 
-exports.load = function(folder){
+exports.load = function (folder) {
 
     const index = require('./index')
 
@@ -183,7 +183,7 @@ exports.load = function(folder){
             props.help.aliases.forEach(alias => {
             index.loadAlias(alias, props.help.name);
             });
-            console.log(`[CMD] ${folder}/${f} loaded!`);
+            console.log(`[BOT] ${folder}/${f} loaded!`);
         });
         })
     } else {
@@ -195,7 +195,6 @@ exports.apiStart = function() { // ? to add commands to the api and stuff look a
     
     app.use(express.static("./views/static", { extensions: "html"})); // static pages.
     // app.use(express.static("./commands", {extensions: "js"})); // ? see code online!
-
 
     app.get("/:command", function(req, res){ // command pages.
         var command = req.params.command;
