@@ -1,82 +1,54 @@
 {
-    "ban": {
-        "desc": "bans the specified user",
-        "use": "ban [user]"    
-    },
-    "bot": {
-        "desc": "shows bot info",
-        "use": "bot (changelog/reload/load [module])"
-    },
-    "cute": {
-        "desc": "Gets a cute post from r/aww",
-        "use": "cute"
-    },
     "coinflip": {
         "desc": "flips a coin",
         "use": "coinflip"
-    },
-    "del": {
-        "desc": "deletes 1-100 messages including your own.",
-        "use": "del [1-99]"
-    },
-    "eval" : {
-        "desc": "You know what it does",
-        "use": "eval [code]"
-    },
-    "exit": {
-        "desc": "Stops the bot",
-        "use": "exit"
-    },
-    "hash": {
-        "desc": "hashes the given string (this is logged!)",
-        "use": "hash [input]"
-    },
-    "kick": {
-        "desc": "kicks the specified user.",
-        "use": "kick [user]"
-    },
-    "logs": {
-        "desc": "sends logs via dm (only if you're the owner)",
-        "use": "logs"
     },
     "meme": {
         "desc": "Gets a meme from r/memes",
         "use": "meme"
     },
-    "nuke": {
-        "desc": "Nukes a server or channel",
-        "use": "nuke [server/channel]"
-    },
     "numgen": {
         "desc": "generates a number.",
         "use": "numgen"
     },
-    "ping": {
-        "desc": "pong",
-        "use": "pong"
+    "cute": {
+        "desc": "cute images :3",
+        "use": "cute"
     },
-    "prefix": {
-        "desc": "changes the prefix",
-        "use": "prefix [new prefix]"
+    "kill": {
+        "desc": "kill someone",
+        "use": "kill"
     },
-    "presence": {
-        "desc": "changes the presence.",
-        "use": "presence [WATCHING/PLAYING/LISTENING/STREAMING] [PRESENCE]"
+    "twinks": {
+        "desc": "(NSFW) Get a twink",
+        "use": "twinks"
     },
-    "say": {
-        "desc": "Say something as the bot! (this is logged to stop abuse)",
-        "use": "say [message]"
+    "pussy": {
+        "desc": "(NSFW) Get a pussypic",
+        "use": "pussy"
     },
-    "sophie": {
-        "desc": "Shows an embed about Sophie and a link to the report form.",
-        "use": "sophie"
+    "porn": {
+        "desc": "(NSFW) Get some quick porn",
+        "use": "porn"
     },
-    "time": {
-        "desc": "tells the time.",
-        "use": "time"
+    "ass": {
+        "desc": "(NSFW) Get an ass pic",
+        "use": "ass"
     },
-    "uptime": {
-        "desc": "shows the uptime of the bot",
-        "use": "uptime"
+    "balance": {
+        "desc": "Check how much money you have",
+        "use": "balance"
+    },
+    "give": {
+        "desc": "Give someone some cash ;)",
+        "use": "give"
+    },
+    "bet": {
+        "desc": "Bet some cash",
+        "use": "bet"
+    },
+    "purge": {
+        "desc": "Bulk-remove messages",
+        "use": "purge"
     }
 }

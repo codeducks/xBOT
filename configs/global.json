@@ -2,14 +2,14 @@
     "md": "**",
     "num_def": "1000",
 
-    "prefix": "./",
+    "prefix": "",
 
-    "defaultmodules": ["default", "admin", "util"],
+    "defaultmodules": ["general", "nsfw", "currency"],
 
-    "useapi": true,
+    "useapi": false,
 
     "presence": "PLAYING",
-    "name": "with Discord.",
+    "name": "with Jake",
 
     "web_url": "https://xbota.herokuapp.com/",
     "github": "https://github.com/codeducks/xBOT",

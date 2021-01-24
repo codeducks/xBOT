@@ -15,11 +15,6 @@ exports.botStart = function() { // will be run on bot "ready".
         fs.mkdirSync('./api');
     }
 
-    if (config.useapi == true){
-        main.apiStart();
-        return;
-    }
-
   // ! BETA. 
   // unquote if on heroku
   // setInterval(function() {got(global.heroku)}, 300 * 1000)
@@ -150,10 +145,6 @@ exports.stats = function(content) {
 	return;
 };
 
-exports.hash = function(content, type) {
-    return crypto.createHash(type).update(content).digest("hex");
-};
-
 exports.check = function(folder){
     if (fs.existsSync(`./commands/${folder}`)){
         return true;
@@ -190,28 +181,3 @@ exports.load = function(folder){
     console.log('tried to load ' + folder + ' but could not find it.')
     }
 };
-
-exports.apiStart = function() { // ? to add commands and stuff look at the ./configs/commands.json
-  // ? FOR HEROKU.
-    app.get("/", function(req, res){
-        res.send("<a href='" + config.cmds + "'>commands<a>");
-    })
-    app.get("/:command", function(req, res){
-        var command = req.params.command;
-        if (!cmds.hasOwnProperty(command)){
-            res.send("404.");
-            return;
-        }
-        var description = cmds[command].desc
-        var layout = config.prefix + cmds[command].use
-        res.render("index.ejs", {cmd: command, desc: description, use: layout});
-    });
-
-  try {
-    app.listen(process.env.PORT || 9090)
-  } catch (err) {
-    console.log("[API] could start on specified port. error: " + err)
-  }
-  // ? SETUP AN ACCOUNT AT cron-job.org FOR KEEPING THE BOT ALIVE. or use the keep alive.
-
-}

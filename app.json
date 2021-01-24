@@ -1,6 +1,6 @@
 {
-    "name": "xBOT",
-    "description": "xBOT for Heroku",
+    "name": "Nobody's Bot",
+    "description": "A bot for nobody",
     "repository": "https://github.com/codeducks/xbot",
     "logo": "https://cdn.worldvectorlogo.com/logos/nodejs-icon.svg",
     "keywords": ["node", "express", "static"]

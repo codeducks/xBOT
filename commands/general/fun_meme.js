@@ -4,18 +4,7 @@ const got = require('got');
 module.exports.run = async (bot, message, args) => {
 	const embed = new Discord.MessageEmbed();
 
-	if(args[0] == "-h") {
-		const embed = new Discord.MessageEmbed();
-		embed.setColor('RANDOM');
-		embed.setTitle(exports.help.name + " help.");
-		embed.addField("layout:", config.prefix + exports.help.name + "", false);
-		embed.addField("purpose:", "shows a random fun fact from reddit.", false);
-		message.channel.send(embed);
-		return;
-	
-	  }
-
-	got('https://www.reddit.com/r/funfacts/random/.json')
+	got('https://www.reddit.com/r/memes/random/.json')
 		.then(response => {
 			const [list] = JSON.parse(response.body);
 			const [post] = list.data.children;
@@ -39,6 +28,6 @@ module.exports.run = async (bot, message, args) => {
 };
 
 module.exports.help = {
-	name: "fact", // * Dwight: Fact, this is js.
-	aliases: ['interesting']
+	name: "meme",
+	aliases: ['funny']
 };

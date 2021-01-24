@@ -11,8 +11,7 @@
     "push": "git push"
   },
   "dependencies": {
-    "crypto": "^1.0.1",
-    "date": "^1.0.2",
+    "better-sqlite3": "^7.1.2",
     "discord.js": "^12.5.1",
     "dotenv": "^8.2.0",
     "ejs": "^3.1.5",
