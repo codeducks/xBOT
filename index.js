@@ -49,7 +49,7 @@ bot.on("message", async message => {
   
   // ? database stuff
 
-  var result = db.prepare("SELECT coins FROM main WHERE id = ?").get(message.author.id)
+  var result = db.prepare("SELECT coins FROM eco WHERE id = ?").get(message.author.id)
   if (result === undefined) {
     db.prepare(`INSERT INTO main (id, coins) VALUES(?, ?);`).run(message.author.id, 1);
   }
