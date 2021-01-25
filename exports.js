@@ -8,6 +8,8 @@ const cmds = require('./configs/commands.json');
 require("dotenv").config();
 const crypto = require("crypto");
 const got = require('got');
+const Database = require("better-sqlite3");
+const db = new Database('./main.db');
 
 exports.botStart = function() { // will be run on bot "ready".
 
@@ -18,6 +20,13 @@ exports.botStart = function() { // will be run on bot "ready".
     if (config.useapi == true){
         main.apiStart();
         return;
+    }
+    
+    result = db.prepare(`SELECT name FROM sqlite_master WHERE type='table' AND name='main';`).get();
+    if (!result) {
+        main.log("[ECO] Created 'main.db' for economy module.");
+        main.log("[ECO] If you have the module disabled then this wont do anything");
+        db.prepare(`CREATE TABLE "main" ("id" TEXT NOT NULL, "coins" INTEGER NOT NULL)`).run();
     }
 
   // ! BETA. 

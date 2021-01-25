@@ -1,6 +1,6 @@
 {
   "name": "xbot",
-  "version": "1.5.2",
+  "version": "1.6.0",
   "description": "an opensource bot.",
   "main": "index.js",
   "repository": "https://github.com/codeducks/xBOT.git",
@@ -11,6 +11,7 @@
     "push": "git push"
   },
   "dependencies": {
+    "better-sqlite3": "^7.1.2",
     "crypto": "^1.0.1",
     "date": "^1.0.2",
     "discord.js": "^12.5.1",

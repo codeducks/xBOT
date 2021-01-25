@@ -4,9 +4,9 @@
 
     "prefix": "./",
 
-    "defaultmodules": ["default", "admin", "util"],
+    "defaultmodules": ["default", "admin", "util", "mod", "fun", "economy"],
 
-    "useapi": true,
+    "useapi": false,
 
     "presence": "PLAYING",
     "name": "with Discord.",

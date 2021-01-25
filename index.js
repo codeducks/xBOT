@@ -6,6 +6,8 @@ const bot = new Discord.Client();
 const exp = require('./exports');
 const http = require('http');
 const { default: got } = require("got/dist/source");
+const Database = require('better-sqlite3');
+const db = new Database('./main.db');
 
 bot.commands = new Discord.Collection();
 bot.aliases = new Discord.Collection();
@@ -44,7 +46,15 @@ bot.on("message", async message => {
   if (message.content.indexOf(global.prefix) !== 0) return;
   if(message.author.bot) return;
   if(message.channel.type === 'dm') return; // ? comment out if you want to enable commands in DMs.
-  let content = message.content.split(" ");
+  
+  // ? database stuff
+
+  var result = db.prepare("SELECT coins FROM main WHERE id = ?").get(message.author.id)
+  if (result === undefined) {
+    db.prepare(`INSERT INTO main (id, coins) VALUES(?, ?);`).run(message.author.id, 1);
+  }
+  
+  let content = message.content.toLowerCase().split(" ");
   let command = content[0];
   let args = content.slice(1);
   let prefix = global.prefix;
