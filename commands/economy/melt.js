@@ -4,16 +4,25 @@ const Discord = require('discord.js');
   const db = new Database('./main.db');
   
   module.exports.run = async (bot, message, args) => {
-    if (message.member.nickname =! null) authorUsername = message.member.nickname
-    else authorUsername = message.author.username
+
+    if (!args[0]) {
+      message.reply("please specify how many coins you would like to destroy!");
+      return;
+    }
+    
+    if (message.member.nickname != null) {
+      authorUsername = message.member.nickname
+    } else {
+      authorUsername = message.author.username
+    }
     embed.setColor('RANDOM');
     embed.setTitle('Free Gold?');
     var result = db.prepare("SELECT coins FROM main WHERE id = ?").get(message.author.id)
-    if (args[1] > result2.coins) {
+    if (args[0] > result.coins) {
       embed.setDescription(`You don't have that many coins`)
       } else {
-        db.prepare(`UPDATE main SET coins = ? WHERE id = ?`).run(result.coins - parseInt(args[1]), message.author.id);
-        embed.setDescription(`${authorUsername} destroyed ${args[1]} coins`)
+        db.prepare(`UPDATE main SET coins = ? WHERE id = ?`).run(result.coins - parseInt(args[0]), message.author.id);
+        embed.setDescription(`${authorUsername} destroyed ${args[0]} coins`)
       }
     message.channel.send(embed);
   }

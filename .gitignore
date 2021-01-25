@@ -12,6 +12,7 @@ yarn.lock
 
 # Scary secrets
 .env
+devmodule
 scaryghosts.js
 # You wouldn't want ghosts in your code!
 logs
