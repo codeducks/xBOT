@@ -1,5 +1,7 @@
 # CHANGELOG
 
+## [v1.6.1](https://github.com/codeducks/xbot/releases/tag/v1.6) (unreleased)
+
 ## [v1.6](https://github.com/codeducks/xbot/releases/tag/v1.6) (25/1/2021)
 
 > Thanks to @WillKenzie for the database functionality and the economy module!

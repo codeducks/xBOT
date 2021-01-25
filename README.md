@@ -4,6 +4,29 @@ A simple discord bot.
 [![Wiki](https://img.icons8.com/ios/32/000000/wikipedia.png)](https://www.github.com/codeducks/xBOT/wiki)  
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/codeducks/xBOT/tree/master)
 
+## Modules.
+
+* admin  
+All bot admin commands are in this module.  
+This module could be loaded with the 'bot load' command.
+* default  
+Leave this in the defaultmodules array!  
+This module has the bot.js file which is pretty essential if you want to load modules while the bot is live.
+* economy  
+$$$! dolla dolla bills!  
+This module is for the economy in the bot!  
+The module uses the 'main.db' database!
+* fun  
+fun stuff.  
+just some stuff that is not nessecary but is fun to use.
+* mod  
+Moderation commands...  
+pretty useful.
+* util  
+help command, say command, ping command.
+
+
+
 ## Commands.  
 add your prefix before the command.  
 you can always add -h after a command to see what it does

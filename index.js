@@ -51,7 +51,7 @@ bot.on("message", async message => {
 
   var result = db.prepare("SELECT coins FROM eco WHERE id = ?").get(message.author.id)
   if (result === undefined) {
-    db.prepare(`INSERT INTO main (id, coins) VALUES(?, ?);`).run(message.author.id, 1);
+    db.prepare(`INSERT INTO eco (id, coins) VALUES(?, ?);`).run(message.author.id, 1);
   }
   
   let content = message.content.toLowerCase().split(" ");
