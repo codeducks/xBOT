@@ -7,7 +7,7 @@ module.exports.run = async (bot, message, args) => {
   authorUsername = message.author.username
   embed.setColor('RANDOM');
   embed.setTitle("Balance");
-  var result = db.prepare("SELECT coins FROM main WHERE id = ?").get(message.author.id)
+  var result = db.prepare("SELECT coins FROM eco WHERE id = ?").get(message.author.id)
   embed.setDescription(`${authorUsername} has ${result.coins} coins`)
   
   message.reply(embed);

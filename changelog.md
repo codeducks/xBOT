@@ -1,7 +1,23 @@
 # CHANGELOG
 
-## [v1.5.2](https://github.com/codeducks/xbot/releases/tag/v1.5.2) (unreleased)
+## [v1.6](https://github.com/codeducks/xbot/releases/tag/v1.6) (25/1/2021)
 
+> Thanks to @WillKenzie for the database functionality and the economy module!
+
+### General
+
++ added main.db to the bot. (SQLite3)
+
+---
+
+### Economy
+  
++ added balance, beg, bet, give, melt, steal to the bot.
+
+---
+
+### API  
+  
 + static pages. (homepage)
 + better file names.
 

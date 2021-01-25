@@ -12,7 +12,7 @@ module.exports.run = async (bot, message, args) => {
 
   embed.setColor('RANDOM');
   embed.setTitle("Bet");
-  var result = db.prepare("SELECT coins FROM main WHERE id = ?").get(message.author.id)
+  var result = db.prepare("SELECT coins FROM eco WHERE id = ?").get(message.author.id)
   if (result === undefined || result.coins == 0 || result.coins < args[0]) {
    embed.setDescription("You can't place a bet with no money dumdum")
   } else {
@@ -25,10 +25,10 @@ module.exports.run = async (bot, message, args) => {
       }
 
       if (args[1] == flipresult) {
-          db.prepare(`UPDATE main SET coins = ? WHERE id = ?`).run((result.coins + parseInt(args[0])), message.author.id);
+          db.prepare(`UPDATE eco SET coins = ? WHERE id = ?`).run((result.coins + parseInt(args[0])), message.author.id);
           embed.setDescription("You won " + args[0] + " coins")
       } else {
-        db.prepare(`UPDATE main SET coins = ? WHERE id = ?`).run((result.coins - parseInt(args[0])), message.author.id);
+        db.prepare(`UPDATE eco SET coins = ? WHERE id = ?`).run((result.coins - parseInt(args[0])), message.author.id);
         embed.setDescription("You lost your bet. You suck.")
       }
       embed.setFooter(`You bet ${args[0]} coins on ${args[1]} and the coin flipped ${flipresult}`)

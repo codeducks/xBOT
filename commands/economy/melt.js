@@ -5,11 +5,10 @@ const Discord = require('discord.js');
   
   module.exports.run = async (bot, message, args) => {
 
-    if (!args[0]) {
+    if (isNaN(args[0])) {
       message.reply("please specify how many coins you would like to destroy!");
       return;
     }
-    
     if (message.member.nickname != null) {
       authorUsername = message.member.nickname
     } else {
@@ -18,7 +17,7 @@ const Discord = require('discord.js');
     embed.setColor('RANDOM');
     embed.setTitle('Free Gold?');
     var result = db.prepare("SELECT coins FROM main WHERE id = ?").get(message.author.id)
-    if (args[0] > result.coins) {
+    if (parseInt(args[0]) > result.coins) {
       embed.setDescription(`You don't have that many coins`)
       } else {
         db.prepare(`UPDATE main SET coins = ? WHERE id = ?`).run(result.coins - parseInt(args[0]), message.author.id);

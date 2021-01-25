@@ -22,11 +22,11 @@ exports.botStart = function() { // will be run on bot "ready".
         return;
     }
     
-    result = db.prepare(`SELECT name FROM sqlite_master WHERE type='table' AND name='main';`).get();
+    result = db.prepare(`SELECT name FROM sqlite_master WHERE type='table' AND name='eco';`).get();
     if (!result) {
         main.log("[ECO] Created 'main.db' for economy module.");
         main.log("[ECO] If you have the module disabled then this wont do anything");
-        db.prepare(`CREATE TABLE "main" ("id" TEXT NOT NULL, "coins" INTEGER NOT NULL)`).run();
+        db.prepare(`CREATE TABLE "eco" ("id" TEXT NOT NULL, "coins" INTEGER NOT NULL)`).run();
     }
 
   // ! BETA. 
