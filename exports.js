@@ -10,18 +10,20 @@ const crypto = require("crypto");
 const got = require('got');
 const Database = require("better-sqlite3");
 const db = new Database('./main.db');
+const mongoose = require('mongoose');
 
 exports.botStart = function() { // will be run on bot "ready".
-
-    if(fs.existsSync('./api') == false) {
-        fs.mkdirSync('./api');
-    }
 
     if (config.useapi == true){
         main.apiStart();
         return;
     }
     
+    mongoose.connect('mongodb+srv://dbUser:b8RiMD03lSUasHtY@xbot.7wcgn.mongodb.net/db?retryWrites=true&w=majority', {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+    });
+
     result = db.prepare(`SELECT name FROM sqlite_master WHERE type='table' AND name='eco';`).get();
     if (!result) {
         main.log("[ECO] Created 'main.db' for economy module.");
