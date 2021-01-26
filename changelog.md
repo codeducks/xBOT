@@ -1,6 +1,9 @@
 # CHANGELOG
 
-## [v1.6.1](https://github.com/codeducks/xbot/releases/tag/v1.6) (unreleased)
+## [v1.6.1](https://github.com/codeducks/xbot/releases/tag/v1.6) (26/1/2021)
+
+* fixed an issue that won't let the bot start.
+* prep for guild prefixes.
 
 ## [v1.6](https://github.com/codeducks/xbot/releases/tag/v1.6) (25/1/2021)
 
