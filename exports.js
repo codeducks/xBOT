@@ -16,19 +16,16 @@ exports.botStart = function() { // will be run on bot "ready".
 
     if (config.useapi == true){
         main.apiStart();
-        return;
     }
-    
-    mongoose.connect('mongodb+srv://dbUser:b8RiMD03lSUasHtY@xbot.7wcgn.mongodb.net/db?retryWrites=true&w=majority', {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-    });
 
-    result = db.prepare(`SELECT name FROM sqlite_master WHERE type='table' AND name='eco';`).get();
-    if (!result) {
-        main.log("[ECO] Created 'main.db' for economy module.");
-        main.log("[ECO] If you have the module disabled then this wont do anything");
-        db.prepare(`CREATE TABLE "eco" ("id" TEXT NOT NULL, "coins" INTEGER NOT NULL)`).run();
+    if (config.useeco == true) {
+
+        result = db.prepare(`SELECT name FROM sqlite_master WHERE type='table' AND name='eco';`).get();
+        if (!result) {
+            main.log("[ECO] Created 'main.db' for economy module.");
+            main.log("[ECO] If you have the module disabled then this wont do anything");
+            db.prepare(`CREATE TABLE "eco" ("id" TEXT NOT NULL, "coins" INTEGER NOT NULL)`).run();
+        }
     }
 
   // ! BETA. 
@@ -173,7 +170,7 @@ exports.check = function(folder){
     }
 };
 
-exports.load = function (folder) {
+exports.load = function (folder, src) {
 
     const index = require('./index')
 
@@ -224,5 +221,14 @@ exports.apiStart = function() { // ? to add commands to the api and stuff look a
     console.log("[API] could start on specified port. error: " + err)
   }
   // ? SETUP AN ACCOUNT AT cron-job.org FOR KEEPING THE BOT ALIVE. or use the keep alive.
+
+}
+
+exports.onMessage = function (message) {
+
+    var result = db.prepare("SELECT coins FROM eco WHERE id = ?").get(message.author.id)
+    if (result === undefined) {
+        db.prepare(`INSERT INTO eco (id, coins) VALUES(?, ?);`).run(message.author.id, 0);
+    }
 
 }

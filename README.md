@@ -1,8 +1,13 @@
 
 A simple discord bot.  
-  
-[![Wiki](https://img.icons8.com/ios/32/000000/wikipedia.png)](https://www.github.com/codeducks/xBOT/wiki)  
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/codeducks/xBOT/tree/master)
+
+---
+## Links:  
+### **[Trello](https://trello.com/b/5QonRmtn/xbot)**
+[![Wiki](https://img.icons8.com/ios/32/000000/wikipedia.png)](https://www.github.com/codeducks/xBOT/wiki) 
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/codeducks/xBOT/tree/master)  
+
+---
 
 ## Modules.
 
@@ -25,7 +30,7 @@ pretty useful.
 * util  
 help command, say command, ping command.
 
-
+---
 
 ## Commands.  
 add your prefix before the command.  
