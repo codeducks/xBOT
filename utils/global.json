@@ -7,6 +7,11 @@
     "defaultmodules": ["default", "admin", "util", "mod", "fun", "economy"],
 
     "useapi": true,
+    "sanitise": {
+
+        "wordfilter": false
+
+    },
 
     "presence": "PLAYING",
     "name": "with Discord.",

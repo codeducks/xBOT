@@ -9,7 +9,8 @@
   "scripts": {
     "start": "node index.js",
     "test": "nodemon index.js",
-    "push": "git push"
+    "push": "git push",
+    "debug": "nodemon --inspect app.js"
   },
   "dependencies": {
     "better-sqlite3": "^7.1.2",
@@ -22,7 +23,8 @@
     "fs": "^0.0.1-security",
     "got": "^11.8.1",
     "mongoose": "^5.11.13",
-    "readline": "^1.3.0"
+    "readline": "^1.3.0",
+    "washyourmouthoutwithsoap": "^1.0.2"
   },
   "private": false,
   "devDependencies": {

@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const main = require('../../index');
-const global = require("../../configs/global.json");
+const global = require("../../utils/global.json");
 const yarn = require("../../package.json");
 const exp = require('../../exports')
 const env = require('dotenv');
