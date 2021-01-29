@@ -229,9 +229,11 @@ exports.apiStart = function() { // ? to add commands to the api and stuff look a
 exports.onMessage = function (message, id) {
 
     // ! runs when a message is sent.
-    var result = db.prepare("SELECT coins FROM eco WHERE id = ?").get(id)
-    if (result === undefined) {
-        db.prepare(`INSERT INTO eco (id, coins) VALUES(?, ?);`).run(id, 0);
+    if(config.useeco == true) {
+        var result = db.prepare("SELECT coins FROM eco WHERE id = ?").get(id)
+        if (result === undefined) {
+            db.prepare(`INSERT INTO eco (id, coins) VALUES(?, ?);`).run(id, 0);
+        }
     }
 
 }
