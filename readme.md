@@ -52,7 +52,7 @@ you can always add -h after a command to see what it does
 | nuke [server/channel] | N/A | Nukes a server or channel. |
 | numgen | N/A | Generate a random number between 0 and 1000. |
 | ping | N/A | Pong! |  
-| prefix [NEW PREFIX] | N/A | changes the presence |  
+| globalprefix [NEW PREFIX] | N/A | changes the presence |  
 | presence [presence] [doing what]? | N/A | changes the presence.  |  
 | say [MESSAGE] | N/A | Say something as the bot! |  
 | sophie (report) | N/A | Shows an embed about Sophie and a link to the report form. |  
@@ -60,4 +60,3 @@ you can always add -h after a command to see what it does
 | time | N/A | tells the time. |  
 | uptime | N/A | Shows the uptime of the bot. |  
 | more soon! |
-
