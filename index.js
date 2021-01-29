@@ -45,6 +45,8 @@ bot.on("message", async message => {
   //a little bit of data parsing/general checks
 
   exp.onMessage(message.content, message.author.id);
+  
+
   if (exp.sanitiser(message.content) == true) {
     message.delete();
     message.reply("that's a no-no word!")
@@ -59,6 +61,9 @@ bot.on("message", async message => {
   let args = content.slice(1);
   let prefix = global.prefix;
 
+  if (!bot.commands.get(command.slice(prefix.length))) {
+   message.channel.send('command not found')
+  }
 
   const commandfile = bot.commands.get(command.slice(prefix.length)) || bot.commands.get(bot.aliases.get(command.slice(prefix.length)));
   if(commandfile) commandfile.run(bot,message,args);
