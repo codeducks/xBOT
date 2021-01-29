@@ -1,0 +1,18 @@
+# npm/yarn
+node_modules
+package-lock.json
+yarn.lock
+
+# VS Code
+*.code-workspace
+.vscode
+
+# Databases
+*.db
+
+# Scary secrets
+.env
+devmodule
+scaryghosts.js
+# You wouldn't want ghosts in your code!
+logs
