@@ -11,7 +11,8 @@ const got = require('got');
 const Database = require("better-sqlite3");
 const db = new Database('./main.db');
 const mongoose = require('mongoose');
-const sanitise = require('./utils/sanitise')
+const sanitise = require('./utils/sanitise');
+const { title } = require("process");
 
 exports.botStart = function() { // will be run on bot "ready".
 
@@ -244,5 +245,19 @@ exports.sanitiser = function (message) {
     }
 
     return deletemsg
+
+}
+
+exports.buildembed = (titleText, messageText, footerText, timestampBool) => {
+
+    const embed = new Discord.MessageEmbed();
+
+    embed.setColor('RANDOM');
+    embed.setTitle(titleText);
+    embed.setDescription(messageText);
+    embed.setFooter(footerText);
+    if (timestampBool == true) {embed.setTimestamp()}
+
+    return embed
 
 }

@@ -34,6 +34,7 @@ module.exports.run = async (bot, message, args) => {
   embed.addField("SHA384", sha384, false)
   embed.addField("SHA512", sha512, false)
   embed.addField("MD5", md5, false)
+  embed.setTimestamp();
 
   message.channel.send(embed);
 }

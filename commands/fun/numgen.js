@@ -38,7 +38,9 @@ module.exports.run = async (bot, message, args) => {
   }
 
   embed.setColor('RANDOM')
-  embed.setTitle(start[srtat] + conf.md + random + conf.md);
+  embed.setTitle("Random number generator. (sort of)");
+  embed.setDescription(start[srtat] + conf.md + random + conf.md);
+  embed.setTimestamp();
   
   message.reply(embed);
 }

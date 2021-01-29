@@ -32,11 +32,13 @@ module.exports.run = async (bot, message, args) => {
 			embed.setColor('RANDOM');
 			embed.setImage(memeImage);
 			embed.setFooter(`👍 ${memeUpvotes} 💬 ${memeNumComments}`);
+			embed.setTimestamp();
 
 			message.channel.send(embed);
 		})
 		.catch(console.error);
 };
+
 /* Want to add your own subreddits? Just replace the /r/aww in the URL
 with your own subreddit (/r/entitledparents for example)
 Be sure to update the name and description!

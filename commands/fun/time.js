@@ -41,7 +41,9 @@ module.exports.run = async (bot, message, args) => {
 
 
     embed.setColor('RANDOM');
-    embed.setTitle(start[srtat] + conf.md + time + " UTC" + tz + conf.md);
+    embed.setDescription(start[srtat] + conf.md + time + " UTC" + tz + conf.md);
+    embed.setTitle("Time.");
+    embed.setTimestamp();
 
     message.reply(embed);
 }

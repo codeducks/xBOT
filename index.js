@@ -62,7 +62,10 @@ bot.on("message", async message => {
   let prefix = global.prefix;
 
   if (!bot.commands.get(command.slice(prefix.length))) {
-   message.channel.send('command not found')
+   message.channel.send(exp.buildembed('Command not found', 
+   "Sorry, this command either does not exist or wasn't loaded.", 
+   global.prefix + 'help for help',
+   true));
   }
 
   const commandfile = bot.commands.get(command.slice(prefix.length)) || bot.commands.get(bot.aliases.get(command.slice(prefix.length)));

@@ -1,3 +1,5 @@
+const exp = require('../../exports');
+
 const deep_quotes = [
     "How can mirrors be real if our eyes aren\'t real?",
     "It's true that we don't know what we've got until we lose it, but it's also true that we don't know what we've been missing until it arrives.",
@@ -67,7 +69,7 @@ const deep_quotes = [
 module.exports.run = async (bot, message, args) => {
     //this is where the actual code for the command goes
     let index = Math.floor(Math.random() * (deep_quotes.length)) // Math.random() returns a float from 0 - 1.
-    message.channel.send(deep_quotes[index])
+    message.channel.send(exp.buildembed('Deep.', deep_quotes[index], "I'm 14 and this is deep.", true))
   }
 
 module.exports.help = {
