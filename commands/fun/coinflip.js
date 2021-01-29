@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const embed = new Discord.MessageEmbed();
-const conf = require("../../configs/global.json");
+const conf = require("../../utils/global.json");
 
 module.exports.run = async (bot, message, args) => {
   // thanks to Will for this code.

@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const conf = require('../../configs/global.json');
+const conf = require('../../utils/global.json');
 const embed = new Discord.MessageEmbed();
 var date = new Date();
 

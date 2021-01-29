@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 const env = require('dotenv');
 const exp = require('../../exports');
-const config = require("../../configs/global.json");
+const config = require("../../utils/global.json");
 
 module.exports.run = async (bot, message, args) => {
   //this is where the actual code for the command goes

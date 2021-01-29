@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 
-const config = require("../../configs/global.json");
+const config = require("../../utils/global.json");
 
 module.exports.run = async (bot, message, args) => {
   //this is where the actual code for the command goes

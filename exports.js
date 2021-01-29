@@ -3,14 +3,15 @@ const Discord = require('discord.js');
 const main = require("./exports");
 const express = require('express');
 const app = require('express')();
-const config = require("./configs/global.json");
-const cmds = require('./configs/commands.json');
+const config = require("./utils/global.json");
+const cmds = require('./utils/commands.json');
 require("dotenv").config();
 const crypto = require("crypto");
 const got = require('got');
 const Database = require("better-sqlite3");
 const db = new Database('./main.db');
 const mongoose = require('mongoose');
+const sanitise = require('./utils/sanitise')
 
 exports.botStart = function() { // will be run on bot "ready".
 
@@ -224,11 +225,24 @@ exports.apiStart = function() { // ? to add commands to the api and stuff look a
 
 }
 
-exports.onMessage = function (message) {
+exports.onMessage = function (message, id) {
 
-    var result = db.prepare("SELECT coins FROM eco WHERE id = ?").get(message.author.id)
+    // ! runs when a message is sent.
+    var result = db.prepare("SELECT coins FROM eco WHERE id = ?").get(id)
     if (result === undefined) {
-        db.prepare(`INSERT INTO eco (id, coins) VALUES(?, ?);`).run(message.author.id, 0);
+        db.prepare(`INSERT INTO eco (id, coins) VALUES(?, ?);`).run(id, 0);
     }
+
+}
+
+exports.sanitiser = function (message) {
+
+    if (config.sanitise.wordfilter == true) {
+        if (sanitise.profanity(message) == true) {
+            var deletemsg = true
+        }
+    }
+
+    return deletemsg
 
 }
