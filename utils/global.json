@@ -19,6 +19,7 @@
 
     "web_url": "https://xbota.herokuapp.com/",
     "github": "https://github.com/codeducks/xBOT",
+    "changelog": "https://codeducks.github.io/xBOT/changelog",
     "cmds": "https://codeducks.github.io/xBOT",
-    "changelog": "https://codeducks.github.io/xBOT/changelog"
+    "trello": "https://trello.com/b/5QonRmtn/xbot"
 }

@@ -1,41 +1,18 @@
 const Discord = require('discord.js');
-const main = require('../../index');
-const global = require("../../utils/global.json");
-const yarn = require("../../package.json");
-const exp = require('../../exports')
+const fs = require('fs');
 const env = require('dotenv');
+const main = require('../../index');
+const exp = require('../../exports');
+const config = require("../../utils/global.json");
 
 module.exports.run = async (bot, message, args) => {
   //this is where the actual code for the command goes
-    const embed = new Discord.MessageEmbed();
-    const user = message.guild.members.cache.get(process.env.OWNER);
-    //const userTag = `${user.username}#${user.discriminator}`;
 
-    function format(seconds){
-      function pad(s){
-        return (s < 10 ? '0' : '') + s;
-      }
-      var hours = Math.floor(seconds / (60*60));
-      var minutes = Math.floor(seconds % (60*60) / 60);
-      var seconds = Math.floor(seconds % 60);
-    
-      return pad(hours) + ':' + pad(minutes) + ':' + pad(seconds);
-    }
-    
-    var uptime = process.uptime();
+  if (message.author.id != process.env.OWNER) { return; }
 
-    switch(args[0]) {
+  switch (args[0]) {
 
-      case '-h':
-      //  const embed = new Discord.MessageEmbed();
-        embed.setColor('RANDOM');
-        embed.setTitle(exports.help.name + " help.");
-        embed.addField("layout:", global.prefix + exports.help.name + " (changelog)", false);
-        embed.addField("purpose:", "either show the bot info or changelog", false);
-        message.channel.send(embed);
-      return;
-
-      case 'load':
+    case 'load':
         if(message.author.id != process.env.OWNER) {
           message.channel.send("You can't load modules, you are not the bot owner.");
           return;
@@ -43,7 +20,6 @@ module.exports.run = async (bot, message, args) => {
   
         if(args[1] == "all"){
           const testFolder = './commands';
-          const fs = require('fs');
   
           var modules = []
   
@@ -77,39 +53,66 @@ module.exports.run = async (bot, message, args) => {
         message.channel.send("Reloaded!");
       return;
 
-      case 'changelog':
-      //  const embed = new Discord.MessageEmbed();
-        embed.setTitle("Changelog");
-        embed.setColor('RANDOM');
-        embed.addField("Link to the changelog", global.changelog, false);
+    case 'set':
+        if(config.hasOwnProperty(args[1]) == false) {
+            message.reply("doesn't exist.");
+            return;
+        }
+    
+        switch (args[2]) {
+            case 'true':
+                correctTerms = true
+            break;
+
+            case 'false':
+                correctTerms = false
+            break;
+
+            default:
+                correctTerms = args[2]
+            break;
+        }
+        message.channel.send(exp.buildembed("Configuration.", `Set property: '${args[1]}' to ${correctTerms}`, "Use with caution.", true));
+        config[args[1]] = correctTerms;
+        fs.writeFile("../../configs/global.json", JSON.stringify(config), (err) => console.error);
+
+    break;
   
-        embed.setTimestamp();
-  
-        message.channel.send(embed);
-      return;
+    case 'sanitise':
 
-      default:
-      //  const embed = new Discord.MessageEmbed();
-        embed.setTitle("Bot Info");
-        embed.setColor('RANDOM');
-        embed.addField( "Bot Owner" , user, true);
-        embed.addField("Uptime:", format(uptime), true);
-        embed.addField("Version:", yarn.version, true);
-        // embed.addField("Loaded Modules:", loadedModules.join(", "), false); // ! maybe later.
-        embed.addField("Bot Commands", global.cmds, false);
-        if(process.env.CLIENTID) embed.addField("Invite:", "https://discord.com/api/oauth2/authorize?client_id=" + process.env.CLIENTID + "&permissions=8&scope=bot")
+        if (config.sanitise.hasOwnProperty(args[1]) == false) {
+            message.reply("doesn't exist.");
+            return;
+        }
 
-        embed.setTimestamp();
+        // boolean => boolean, string => string
+        switch (args[2]) {
 
-        message.channel.send(embed);
-      return;
+            case 'true':
+                sanitiseTerms = true
+            break;
+
+            case 'false':
+                sanitiseTerms = false
+            break;
+
+            default:
+                sanitiseTerms = args[2]
+            break;
+
+        }
+
+        message.channel.send(exp.buildembed("Sanitise configuration.", `Set property: '${args[1]}' to ${sanitiseTerms}`, "Use with caution.", true));
+        config.sanitise[args[1]] = sanitiseTerms;
+        fs.writeFile("../../configs/global.json", JSON.stringify(config), (err) => console.error);
+
+    break;
 
     }
-
 }
 
 //name this whatever the command name is.
 module.exports.help = {
   name: 'bot',
-  aliases: ['info']
+  aliases: []
 }

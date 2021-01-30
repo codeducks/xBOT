@@ -41,8 +41,9 @@ you can always add -h after a command to see what it does
 | ban [USER] | N/A | Bans the specified user. |  
 | beg | N/A | Beg for money |
 | bet | N/A | bet money on a coinflip! (check your spelling!) |
-| bot (changelog) | info | Shows bot info (or changelog.) |  
+| info (changelog) | info | Shows bot info (or changelog.) |  
 | bot load [module/all] | N/A | Loads module (can only be used by owner.) |
+| bot set [property] [string/boolean] | config | change properties. |  
 | cringe | N/A | Gets a cringy post from r/cringe. (needs some tweaking) |  
 | coinflip | N/A | flips a coin. |  
 | del [1-100] | purge, delete | Deletes the number of messages specified. (up until 100) |

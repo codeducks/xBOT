@@ -230,12 +230,12 @@ exports.onMessage = function (message, id) {
 
     // ! runs when a message is sent.
     if(config.useeco == true) {
-        var result = db.prepare("SELECT coins FROM eco WHERE id = ?").get(id)
-        if (result === undefined) {
+        var ecoresult = db.prepare("SELECT coins FROM eco WHERE id = ?").get(id)
+        if (ecoresult === undefined) {
             db.prepare(`INSERT INTO eco (id, coins) VALUES(?, ?);`).run(id, 0);
         }
     }
-
+    
 }
 
 exports.sanitiser = function (message) {
