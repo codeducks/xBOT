@@ -61,7 +61,7 @@ bot.on("message", async message => {
   let args = content.slice(1);
   let prefix = global.prefix;
 
-  if (!bot.commands.get(command.slice(prefix.length))) {
+  if (!bot.commands.get(command.slice(prefix.length)) && !bot.aliases.get(command.slice(prefix.length))) {
    message.channel.send(exp.buildembed('Command not found', 
    "Sorry, this command either does not exist or wasn't loaded.", 
    global.prefix + 'help for help',

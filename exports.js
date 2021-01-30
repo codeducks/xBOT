@@ -235,7 +235,7 @@ exports.onMessage = function (message, id) {
             db.prepare(`INSERT INTO eco (id, coins) VALUES(?, ?);`).run(id, 0);
         }
     }
-    
+
 }
 
 exports.sanitiser = function (message) {
@@ -261,5 +261,31 @@ exports.buildembed = (titleText, messageText, footerText, timestampBool) => {
     if (timestampBool == true) {embed.setTimestamp()}
 
     return embed
+
+}
+
+exports.formatter = (unformattedString) => {
+
+    // == array!
+    if(unformattedString.includes('[')) {
+        var v1 = unformattedString.replace('[', '')
+        var v2 = v1.replace(']', '')
+        var array = v2.split(',')
+        return array
+    }
+
+    switch (unformattedString) {
+
+        case 'true':
+        return true;
+
+        case 'false':
+        return false;
+
+        default: 
+        // return string..
+        return unformattedString
+
+    }
 
 }

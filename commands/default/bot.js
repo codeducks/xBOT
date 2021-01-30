@@ -59,20 +59,15 @@ module.exports.run = async (bot, message, args) => {
             return;
         }
     
-        switch (args[2]) {
-            case 'true':
-                correctTerms = true
-            break;
+        correctTerms = exp.formatter(args[2])
 
-            case 'false':
-                correctTerms = false
-            break;
-
-            default:
-                correctTerms = args[2]
-            break;
+        if (correctTerms = Array) {
+          msgterms = "[Object]"
+        } else {
+          msgterms = correctTerms
         }
-        message.channel.send(exp.buildembed("Configuration.", `Set property: '${args[1]}' to ${correctTerms}`, "Use with caution.", true));
+
+        message.channel.send(exp.buildembed("Configuration.", `Set property: '${args[1]}' to ${msgterms}`, "Use with caution.", true));
         config[args[1]] = correctTerms;
         fs.writeFile("../../configs/global.json", JSON.stringify(config), (err) => console.error);
 
@@ -86,21 +81,8 @@ module.exports.run = async (bot, message, args) => {
         }
 
         // boolean => boolean, string => string
-        switch (args[2]) {
-
-            case 'true':
-                sanitiseTerms = true
-            break;
-
-            case 'false':
-                sanitiseTerms = false
-            break;
-
-            default:
-                sanitiseTerms = args[2]
-            break;
-
-        }
+        
+        sanitiseTerms = exp.formatter(args[2])
 
         message.channel.send(exp.buildembed("Sanitise configuration.", `Set property: '${args[1]}' to ${sanitiseTerms}`, "Use with caution.", true));
         config.sanitise[args[1]] = sanitiseTerms;
