@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## [v1.6.2](https://github.com/codeducks/xbot/releases/tag/v1.6.2) (unreleased)
+## [v1.6.2](https://github.com/codeducks/xbot/releases/tag/v1.6.2) (31/1/2021)
 
 * added config command (old bot command is now info)
 * say hello to chat sanitizer.
