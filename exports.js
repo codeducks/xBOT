@@ -1,3 +1,5 @@
+// lots of depends, i know.
+
 const fs = require("fs");
 const Discord = require('discord.js');
 const main = require("./exports");
@@ -10,9 +12,7 @@ const crypto = require("crypto");
 const got = require('got');
 const Database = require("better-sqlite3");
 const db = new Database('./main.db');
-const mongoose = require('mongoose');
 const sanitise = require('./utils/sanitise');
-const { title } = require("process");
 
 exports.botStart = function() { // will be run on bot "ready".
 
@@ -219,7 +219,8 @@ exports.apiStart = function() { // ? to add commands to the api and stuff look a
 
   try {
     app.listen(process.env.PORT || 9090)
-  } catch (err) {
+    console.log('[API] api is active.')
+    } catch (err) {
     console.log("[API] could start on specified port. error: " + err)
   }
   // ? SETUP AN ACCOUNT AT cron-job.org FOR KEEPING THE BOT ALIVE. or use the keep alive.
