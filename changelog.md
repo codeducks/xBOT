@@ -1,6 +1,12 @@
 # CHANGELOG
 
-## [v1.6.1](https://github.com/codeducks/xbot/releases/tag/v1.6) (26/1/2021)
+## [v1.6.2](https://github.com/codeducks/xbot/releases/tag/v1.6.2) (unreleased)
+
+* added config command (old bot command is now info)
+* say hello to chat sanitizer.
+
+
+## [v1.6.1](https://github.com/codeducks/xbot/releases/tag/v1.6.1) (26/1/2021)
 
 * fixed an issue that won't let the bot start.
 * prep for guild prefixes.

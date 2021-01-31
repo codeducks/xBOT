@@ -32,6 +32,7 @@ module.exports.run = async (bot, message, args) => {
 			embed.setColor('RANDOM');
 			embed.setImage(memeImage);
 			embed.setFooter(`👍 ${memeUpvotes} 💬 ${memeNumComments}`);
+			embed.setTimestamp();
 
 			message.channel.send(embed);
 		})

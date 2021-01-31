@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const main = require('../../exports');
-const config = require("../../configs/global.json");
+const config = require("../../utils/global.json");
 
 module.exports.run = async (bot, message, args) => {
   //this is where the actual code for the command goes
@@ -34,6 +34,7 @@ module.exports.run = async (bot, message, args) => {
   embed.addField("SHA384", sha384, false)
   embed.addField("SHA512", sha512, false)
   embed.addField("MD5", md5, false)
+  embed.setTimestamp();
 
   message.channel.send(embed);
 }

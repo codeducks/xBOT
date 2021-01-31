@@ -4,15 +4,22 @@
 
     "prefix": "./",
 
-    "defaultmodules": ["default", "admin", "util", "mod", "fun", "economy"],
+    "defaultmodules": ["default", "admin", "other", "mod", "fun", "economy"],
 
     "useapi": true,
+    "useeco": true,
+    "sanitise": {
+
+        "wordfilter": false
+
+    },
 
     "presence": "PLAYING",
     "name": "with Discord.",
 
     "web_url": "https://xbota.herokuapp.com/",
     "github": "https://github.com/codeducks/xBOT",
+    "changelog": "https://codeducks.github.io/xBOT/changelog",
     "cmds": "https://codeducks.github.io/xBOT",
-    "changelog": "https://codeducks.github.io/xBOT/changelog"
+    "trello": "https://trello.com/b/5QonRmtn/xbot"
 }

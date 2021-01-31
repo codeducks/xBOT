@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const conf = require("../../configs/global.json");
+const conf = require("../../utils/global.json");
 
 module.exports.run = async (bot, message, args) => {
   //this is where the actual code for the command goes
@@ -38,7 +38,9 @@ module.exports.run = async (bot, message, args) => {
   }
 
   embed.setColor('RANDOM')
-  embed.setTitle(start[srtat] + conf.md + random + conf.md);
+  embed.setTitle("Random number generator. (sort of)");
+  embed.setDescription(start[srtat] + conf.md + random + conf.md);
+  embed.setTimestamp();
   
   message.reply(embed);
 }

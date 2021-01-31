@@ -1,34 +1,33 @@
+// lots of depends, i know.
+
 const fs = require("fs");
 const Discord = require('discord.js');
 const main = require("./exports");
 const express = require('express');
 const app = require('express')();
-const config = require("./configs/global.json");
-const cmds = require('./configs/commands.json');
+const config = require("./utils/global.json");
+const cmds = require('./utils/commands.json');
 require("dotenv").config();
 const crypto = require("crypto");
 const got = require('got');
 const Database = require("better-sqlite3");
 const db = new Database('./main.db');
-const mongoose = require('mongoose');
+const sanitise = require('./utils/sanitise');
 
 exports.botStart = function() { // will be run on bot "ready".
 
     if (config.useapi == true){
         main.apiStart();
-        return;
     }
-    
-    mongoose.connect('mongodb+srv://dbUser:b8RiMD03lSUasHtY@xbot.7wcgn.mongodb.net/db?retryWrites=true&w=majority', {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-    });
 
-    result = db.prepare(`SELECT name FROM sqlite_master WHERE type='table' AND name='eco';`).get();
-    if (!result) {
-        main.log("[ECO] Created 'main.db' for economy module.");
-        main.log("[ECO] If you have the module disabled then this wont do anything");
-        db.prepare(`CREATE TABLE "eco" ("id" TEXT NOT NULL, "coins" INTEGER NOT NULL)`).run();
+    if (config.useeco == true) {
+
+        result = db.prepare(`SELECT name FROM sqlite_master WHERE type='table' AND name='eco';`).get();
+        if (!result) {
+            main.log("[ECO] Created 'main.db' for economy module.");
+            main.log("[ECO] If you have the module disabled then this wont do anything");
+            db.prepare(`CREATE TABLE "eco" ("id" TEXT NOT NULL, "coins" INTEGER NOT NULL)`).run();
+        }
     }
 
   // ! BETA. 
@@ -173,7 +172,7 @@ exports.check = function(folder){
     }
 };
 
-exports.load = function (folder) {
+exports.load = function (folder, src) {
 
     const index = require('./index')
 
@@ -220,9 +219,74 @@ exports.apiStart = function() { // ? to add commands to the api and stuff look a
 
   try {
     app.listen(process.env.PORT || 9090)
-  } catch (err) {
+    console.log('[API] api is active.')
+    } catch (err) {
     console.log("[API] could start on specified port. error: " + err)
   }
   // ? SETUP AN ACCOUNT AT cron-job.org FOR KEEPING THE BOT ALIVE. or use the keep alive.
+
+}
+
+exports.onMessage = function (message, id) {
+
+    // ! runs when a message is sent.
+    if(config.useeco == true) {
+        var ecoresult = db.prepare("SELECT coins FROM eco WHERE id = ?").get(id)
+        if (ecoresult === undefined) {
+            db.prepare(`INSERT INTO eco (id, coins) VALUES(?, ?);`).run(id, 0);
+        }
+    }
+
+}
+
+exports.sanitiser = function (message) {
+
+    if (config.sanitise.wordfilter == true) {
+        if (sanitise.profanity(message) == true) {
+            var deletemsg = true
+        }
+    }
+
+    return deletemsg
+
+}
+
+exports.buildembed = (titleText, messageText, footerText, timestampBool) => {
+
+    const embed = new Discord.MessageEmbed();
+
+    embed.setColor('RANDOM');
+    embed.setTitle(titleText);
+    embed.setDescription(messageText);
+    embed.setFooter(footerText);
+    if (timestampBool == true) {embed.setTimestamp()}
+
+    return embed
+
+}
+
+exports.formatter = (unformattedString) => {
+
+    // == array!
+    if(unformattedString.includes('[')) {
+        var v1 = unformattedString.replace('[', '')
+        var v2 = v1.replace(']', '')
+        var array = v2.split(',')
+        return array
+    }
+
+    switch (unformattedString) {
+
+        case 'true':
+        return true;
+
+        case 'false':
+        return false;
+
+        default: 
+        // return string..
+        return unformattedString
+
+    }
 
 }

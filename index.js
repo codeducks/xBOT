@@ -1,6 +1,6 @@
 const Discord = require("discord.js")
 require('dotenv').config();
-const global = require("./configs/global.json")
+const global = require("./utils/global.json")
 const fs = require("fs")
 const bot = new Discord.Client();
 const exp = require('./exports');
@@ -43,22 +43,30 @@ bot.on("ready", () => {
 
 bot.on("message", async message => {
   //a little bit of data parsing/general checks
+
+  exp.onMessage(message.content, message.author.id);
+  
+
+  if (exp.sanitiser(message.content) == true) {
+    message.delete();
+    message.reply("that's a no-no word!")
+  }
+
   if (message.content.indexOf(global.prefix) !== 0) return;
   if(message.author.bot) return;
   if(message.channel.type === 'dm') return; // ? comment out if you want to enable commands in DMs.
-  
-  // ? database stuff
-
-  var result = db.prepare("SELECT coins FROM eco WHERE id = ?").get(message.author.id)
-  if (result === undefined) {
-    db.prepare(`INSERT INTO eco (id, coins) VALUES(?, ?);`).run(message.author.id, 1);
-  }
   
   let content = message.content.toLowerCase().split(" ");
   let command = content[0];
   let args = content.slice(1);
   let prefix = global.prefix;
 
+  if (!bot.commands.get(command.slice(prefix.length)) && !bot.aliases.get(command.slice(prefix.length))) {
+   message.channel.send(exp.buildembed('Command not found', 
+   "Sorry, this command either does not exist or wasn't loaded.", 
+   global.prefix + 'help for help',
+   true));
+  }
 
   const commandfile = bot.commands.get(command.slice(prefix.length)) || bot.commands.get(bot.aliases.get(command.slice(prefix.length)));
   if(commandfile) commandfile.run(bot,message,args);
