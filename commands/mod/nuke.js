@@ -28,10 +28,6 @@ module.exports.run = async (bot, message, args) => {
 
     if(!message.member.hasPermission('ADMINISTRATOR')) return;
 
-    if(args[0] == "server"){
-        message.guild.channels.deleteAll();
-        main.stats("A server was nuked!");
-    }
     if(args[0] == "channel"){
         message.channel.delete();
         main.stats("A channel was nuked!")

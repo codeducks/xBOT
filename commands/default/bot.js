@@ -4,6 +4,9 @@ const env = require('dotenv');
 const main = require('../../index');
 const exp = require('../../exports');
 const config = require("../../utils/global.json");
+const rp = require('request-promise')
+const jsdom = require('jsdom');
+const path = require('path')
 
 module.exports.run = async (bot, message, args) => {
   //this is where the actual code for the command goes
@@ -11,6 +14,29 @@ module.exports.run = async (bot, message, args) => {
   if (message.author.id != process.env.OWNER) { return; }
 
   switch (args[0]) {
+
+    case 'dl':
+      if(message.author.id != process.env.OWNER) {
+        message.channel.send("You can't load modules, you are not the bot owner.");
+        return;
+      }
+
+      rp(String(args[1]))
+        .then(function(html) {
+
+        const { JSDOM } = jsdom
+        const dom = new JSDOM(html)
+        const code = dom.window.document.querySelector("pre").textContent;
+
+        fs.appendFile(`./plugins/${path.basename(args[1])}.js`, code)
+
+      }).catch(function(error) {
+
+        message.reply("could not download the plugin from: " + config.md + args[2] + config.md)
+
+      })
+
+    return;
 
     case 'load':
         if(message.author.id != process.env.OWNER) {
