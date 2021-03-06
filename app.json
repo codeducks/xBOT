@@ -1,7 +1,0 @@
-{
-    "name": "xBOT",
-    "description": "xBOT for Heroku",
-    "repository": "https://github.com/codeducks/xbot",
-    "logo": "https://cdn.worldvectorlogo.com/logos/nodejs-icon.svg",
-    "keywords": ["node", "express", "static"]
-}
