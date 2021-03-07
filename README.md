@@ -1,4 +1,4 @@
-An simple discord bot.  
+An easy to use, yet advanced bot.  
 
 ---
 ## Links:  
