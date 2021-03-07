@@ -17,11 +17,13 @@ module.exports.run = async (bot, message, args) => {
 
                 var data = {"on": true}
                 hue.data(lID, data)
+                embed.addField("sent_data", JSON.stringify(data))
 
             } else if (args[2] == "off") {
 
                 var data = {"on": false}
                 hue.data(lID, data)
+                embed.addField("sent_data", JSON.stringify(data))
 
             }
         break;
@@ -31,6 +33,7 @@ module.exports.run = async (bot, message, args) => {
 
             var data = { "bri": Number(args[2]) }
             hue.data(lID, data)
+            embed.addField("sent_data", JSON.stringify(data))
 
         break;
 
@@ -38,13 +41,15 @@ module.exports.run = async (bot, message, args) => {
         case "tone":
             var data = { "ct": Number(args[2]) }
             hue.data(lID, data)
+            embed.addField("sent_data", JSON.stringify(data))
         break;
+
     }
 
     embed.setTitle("Hue Lights")
     embed.setColor('RANDOM')
     embed.setDescription("Changed state for light: " + lID)
-    embed.addField("sent_data", JSON.stringify(data))
+    
 
     message.channel.send(embed)
 

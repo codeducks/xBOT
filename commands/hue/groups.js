@@ -18,10 +18,12 @@ module.exports.run = async (bot, message, args) => {
 
                 var data = {"on": true}
                 hue.group(gID, data)
+                embed.addField("sent_data", JSON.stringify(data))
 
             } else if (args[2] == "off") {
 
                 hue.group(gID, data)
+                embed.addField("sent_data", JSON.stringify(data))
 
             }
         break;
@@ -31,13 +33,15 @@ module.exports.run = async (bot, message, args) => {
 
             var data = { "bri": Number(args[2]) }
             hue.group(gID, data)
+            embed.addField("sent_data", JSON.stringify(data))
 
         break;
 
         case "ct":
         case "tone":
-            var data =
-            hue.group(gID, { "ct": Number(args[2]) })
+            var data = { "ct": Number(args[2]) }
+            hue.group(gID, data)
+            embed.addField("sent_data", JSON.stringify(data))
         break;
 
     }
@@ -45,7 +49,6 @@ module.exports.run = async (bot, message, args) => {
     embed.setTitle("Hue Lights")
     embed.setColor('RANDOM')
     embed.setDescription("Changed state for group: " + gID)
-    embed.addField("sent_data", JSON.stringify(data))
 
     message.channel.send(embed)
 
