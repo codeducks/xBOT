@@ -112,4 +112,4 @@ exports.reload = function(arg, module) {
   
 }
 
-bot.login(process.env.TOKEN) // change your token in the global.json
+bot.login(process.env.TOKEN) // your token can be specified in the .env file
