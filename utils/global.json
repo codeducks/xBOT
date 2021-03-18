@@ -7,11 +7,13 @@
     "defaultmodules": ["default", "admin", "other", "mod", "fun", "economy"],
 
     "useapi": true,
+    "APIPort": 8080,
+
     "useeco": true,
+
     "sanitise": {
-
-        "wordfilter": false
-
+        "wordfilter": false,
+        "capsfilter": false
     },
 
     "hue_ip": "192.168.0.30",

@@ -4,6 +4,7 @@ const conf = require("../../utils/global.json");
 
 module.exports.run = async (bot, message, args) => {
   // thanks to Will for this code.
+  message.delete();
   random = Math.floor((Math.random() * 2) + 1);
 
   if(args[0] == "-h") {

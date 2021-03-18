@@ -7,6 +7,7 @@ const exp = require('./exports');
 const http = require('http');
 // const { default: got } = require("got/dist/source");
 const Database = require('better-sqlite3');
+const { config } = require("dotenv");
 const db = new Database('./main.db');
 
 bot.commands = new Discord.Collection();
@@ -50,20 +51,32 @@ bot.on("ready", () => {
 
 });
 
+function ruled(a) {
+  if (a == false) return "allowed"
+  if (a == true) return "disallowed"
+}
+
 bot.on("message", async message => {
   //a little bit of data parsing/general checks
+  if(message.author.bot) return;
+  if(message.channel.type === 'dm') return; // ? comment out if you want to enable commands in DMs.
 
   exp.onMessage(message.content, message.author.id);
-  
+
   if (exp.sanitiser(message.content) == true) {
     message.delete();
-    message.reply("that's a no-no word!")
+    const embed = new Discord.MessageEmbed();
+    embed.setTitle("Whoops!")
+    embed.setDescription("Here are the chat filters!")
+    embed.addField("Profanity", ruled(global.sanitise.wordfilter), true)
+    embed.addField("Caps", ruled(global.sanitise.capsfilter), true)
+
+    message.channel.send(embed)
+
   }
 
   if (message.content.indexOf(global.prefix) !== 0) return;
-  if(message.author.bot) return;
-  if(message.channel.type === 'dm') return; // ? comment out if you want to enable commands in DMs.
-  
+
   let content = message.content.toLowerCase().split(" ");
   let command = content[0];
   let args = content.slice(1);

@@ -3,6 +3,7 @@ const conf = require("../../utils/global.json");
 
 module.exports.run = async (bot, message, args) => {
   //this is where the actual code for the command goes
+  message.delete();
   const embed = new Discord.MessageEmbed();
 
   if(args[0] == "-h") {

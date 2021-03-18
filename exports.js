@@ -12,7 +12,7 @@ const crypto = require("crypto");
 const got = require('got');
 const Database = require("better-sqlite3");
 const db = new Database('./main.db');
-const sanitise = require('./utils/sanitise');
+const prof = require('washyourmouthoutwithsoap')
 
 exports.botStart = function() { // will be run on bot "ready".
 
@@ -85,7 +85,7 @@ exports.log = function(content) { // logs every thing to a log file
             return
         }
     } 
-	console.log(content)
+    console.log(content)
 	return;
 };
 
@@ -204,7 +204,7 @@ exports.load = function (folder, src) {
 exports.apiStart = function() { // ? to add commands to the api and stuff look at the ./configs/commands.json
     
     app.use(express.static("./views/static", { extensions: "html"})); // static pages.
-    // app.use(express.static("./commands", {extensions: "js"})); // ? see code online!
+    // app.use(express.static("./commands", {extensions: "js"})); // ? see code from your bot online! (only from "./commands")
 
     app.get("/:command", function(req, res){ // command pages.
         var command = req.params.command;
@@ -218,13 +218,12 @@ exports.apiStart = function() { // ? to add commands to the api and stuff look a
     });
 
   try {
-    app.listen(process.env.PORT || 9090)
+    app.listen(config.APIPort)
     console.log('[API] api is active.')
     } catch (err) {
     console.log("[API] could start on specified port. error: " + err)
   }
-  // ? SETUP AN ACCOUNT AT cron-job.org FOR KEEPING THE BOT ALIVE. or use the keep alive.
-
+  // ? SETUP AN ACCOUNT AT cron-job.org FOR KEEPING THE BOT ALIVE. (only for heroku)
 }
 
 exports.onMessage = function (message, id) {
@@ -242,9 +241,15 @@ exports.onMessage = function (message, id) {
 exports.sanitiser = function (message) {
 
     if (config.sanitise.wordfilter == true) {
-        if (sanitise.profanity(message) == true) {
+        if (prof.check(message) == true) {
             var deletemsg = true
         }
+    }
+
+    if (config.sanitise.capsfilter == true) {
+        if (message === message.toUpperCase()) {
+            var deletemsg = true;
+        }    
     }
 
     return deletemsg
@@ -267,7 +272,7 @@ exports.buildembed = (titleText, messageText, footerText, timestampBool) => {
 
 exports.formatter = (unformattedString) => {
 
-    // == array!
+    // if it is an array it will make it one.
     if(unformattedString.includes('[')) {
         var v1 = unformattedString.replace('[', '')
         var v2 = v1.replace(']', '')
@@ -275,6 +280,7 @@ exports.formatter = (unformattedString) => {
         return array
     }
 
+    // true or false
     switch (unformattedString) {
 
         case 'true':
